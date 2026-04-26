@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
-import { Bell, X, Info, AlertCircle, CheckCircle } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { X, Info, AlertCircle, CheckCircle } from 'lucide-react'
 import { clsx } from 'clsx'
+import { useNotificationStore } from '@/stores/notificationStore'
 
 interface Toast {
   id: string
@@ -9,33 +10,48 @@ interface Toast {
   type: 'info' | 'warning' | 'success'
 }
 
+const TOAST_TYPE_BY_NOTIF: Record<string, Toast['type']> = {
+  review:            'success',
+  remark:            'info',
+  agenda_update:     'info',
+  incident:          'warning',
+  companion_message: 'warning',
+  system:            'info',
+}
+
 export function NotificationToast() {
   const [toasts, setToasts] = useState<Toast[]>([])
+  const notifications = useNotificationStore(s => s.notifications)
+  const seenRef = useRef<Set<string>>(new Set())
 
-  // Simuler des notifications temps réel (Lien terrain)
+  // Whenever a new notification lands in the store (via SSE or refresh),
+  // surface a toast — but only once per notification id and never on initial fetch.
   useEffect(() => {
-    const timer = setTimeout(() => {
-      addToast('Alerte Terrain', 'Le chauffeur Ahmed L. vient d\'arriver à l\'aéroport RAK.', 'success')
-    }, 5000)
+    if (notifications.length === 0) return
 
-    const timer2 = setTimeout(() => {
-      addToast('Mise à jour Vol', 'Retard de 15min détecté pour le vol AT771 (Groupe US).', 'warning')
-    }, 12000)
-
-    return () => {
-      clearTimeout(timer)
-      clearTimeout(timer2)
+    if (seenRef.current.size === 0) {
+      // First load — mark everything as already-seen, no toast spam.
+      notifications.forEach(n => seenRef.current.add(n.id))
+      return
     }
-  }, [])
 
-  const addToast = (title: string, message: string, type: 'info' | 'warning' | 'success') => {
-    const id = Math.random().toString(36).substr(2, 9)
+    const fresh = notifications.filter(n => !seenRef.current.has(n.id))
+    if (fresh.length === 0) return
+
+    fresh.forEach(n => {
+      seenRef.current.add(n.id)
+      addToast(
+        n.title || 'Notification',
+        n.message || '',
+        TOAST_TYPE_BY_NOTIF[n.type] ?? 'info',
+      )
+    })
+  }, [notifications])
+
+  const addToast = (title: string, message: string, type: Toast['type']) => {
+    const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
     setToasts(prev => [...prev, { id, title, message, type }])
-    
-    // Auto remove
-    setTimeout(() => {
-      removeToast(id)
-    }, 6000)
+    setTimeout(() => removeToast(id), 6000)
   }
 
   const removeToast = (id: string) => {
