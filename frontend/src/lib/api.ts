@@ -713,7 +713,9 @@ export const guidePortalApi = {
 
 // ── Notifications ─────────────────────────────────────────────────
 export const notificationsApi = {
-  list:        ()           => api.get('/notifications'),
+  // Trailing slash is required: backend route is `@router.get("/")` and the app does
+  // not enable FastAPI's slash redirect, so `/api/notifications` (no slash) returns 404.
+  list:        ()           => api.get('/notifications/'),
   unreadCount: ()           => api.get('/notifications/unread-count'),
   markRead:    (id: string) => api.patch(`/notifications/${id}/read`),
   markAllRead: ()           => api.patch('/notifications/read-all'),
