@@ -26,7 +26,7 @@ import { useSSENotifications, SSENotification } from '@/hooks/useSSENotification
 import { GlobalSearch } from '@/components/ui/GlobalSearch'
 import { GuidedTour } from '@/components/ui/GuidedTour'
 import { getNavGroups, isMobileRole } from '@/lib/roleConfig'
-import { useAppNotifications } from '@/hooks/useAppNotifications'
+import { useNotificationStore } from '@/stores/notificationStore'
 import rihlaLogoDark from '@/assets/rihla_logo_dark_bg.png'
 import rihlaLogoLight from '@/assets/rihla_logo_light_bg.png'
 
@@ -56,11 +56,20 @@ export function AppShell() {
     i18n.changeLanguage(lng)
   }
 
+  const pushIncoming = useNotificationStore(s => s.pushIncoming)
+  const fetchAllNotifications = useNotificationStore(s => s.fetchAll)
+  const initializedNotifs = useNotificationStore(s => s.initialized)
+
   const handleNotification = useCallback((n: SSENotification) => {
-    console.info(`[Notification] ${n.title} — ${n.message}`)
-  }, [])
+    pushIncoming(n)
+  }, [pushIncoming])
 
   useSSENotifications(handleNotification)
+
+  // Hydrate the notification store once the user is logged in.
+  useEffect(() => {
+    if (user && !initializedNotifs) fetchAllNotifications()
+  }, [user, initializedNotifs, fetchAllNotifications])
 
   const isPublicPath = location.pathname === '/pricing-simulator'
 
@@ -71,7 +80,10 @@ export function AppShell() {
   const role = user?.role?.name ?? ''
   const mobileRole = isMobileRole(role)
 
-  const { notifications, unreadCount, markAsRead, clearAll } = useAppNotifications()
+  const notifications = useNotificationStore(s => s.notifications)
+  const unreadCount   = useNotificationStore(s => s.unreadCount)
+  const markRead      = useNotificationStore(s => s.markRead)
+  const markAllRead   = useNotificationStore(s => s.markAllRead)
   const navGroups = getNavGroups(role)
 
   const initials = (user?.full_name || user?.email || 'U')
@@ -237,15 +249,18 @@ export function AppShell() {
               <div className="absolute right-0 top-10 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-3">
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-[12px] font-medium text-slate-700 dark:text-cream">Notifications {unreadCount > 0 && `(${unreadCount})`}</p>
-                  <button onClick={clearAll} className="text-[11px] text-rihla hover:underline">Tout lire</button>
+                  <div className="flex items-center gap-2">
+                    <button onClick={markAllRead} className="text-[11px] text-rihla hover:underline">Tout lire</button>
+                    <Link to="/notifications" className="text-[11px] text-slate-400 hover:underline">Voir tout</Link>
+                  </div>
                 </div>
                 <div className="space-y-1.5 max-h-60 overflow-y-auto">
                   {notifications.length === 0 ? (
                     <p className="text-[12px] text-center py-6 text-slate-400">Aucune notification</p>
-                  ) : notifications.map(n => (
-                    <div key={n.id} onClick={() => markAsRead(n.id)} className={clsx("p-2.5 rounded-md transition-colors cursor-pointer", n.isRead ? "opacity-50" : "bg-slate-50 dark:bg-white/5 hover:bg-slate-100")}>
+                  ) : notifications.slice(0, 8).map(n => (
+                    <div key={n.id} onClick={() => markRead(n.id)} className={clsx("p-2.5 rounded-md transition-colors cursor-pointer", n.is_read ? "opacity-50" : "bg-slate-50 dark:bg-white/5 hover:bg-slate-100")}>
                       <p className="text-[12px] font-medium text-slate-900 dark:text-cream leading-tight">{n.title}</p>
-                      <p className="text-[11px] text-slate-500 mt-0.5">{n.message}</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-2">{n.message}</p>
                     </div>
                   ))}
                 </div>

@@ -36,6 +36,7 @@ from app.modules.travel_companion.service import (
     revoke_link,
     touch_link,
 )
+from app.modules.notifications.service import dispatch_to_project
 
 
 # ── Agency-side ───────────────────────────────────────────────────
@@ -236,21 +237,40 @@ def view_trip(
 
 
 @public_router.post("/{token}/messages", response_model=TravelMessageOut, status_code=201)
-def post_message(
+async def post_message(
     token: str,
     payload: TravelMessageCreate,
     pin: Optional[str] = None,
     db: Session = Depends(get_db),
 ):
     link = _resolve_link_or_404(token, db, pin)
+    kind = payload.kind if payload.kind in ("message", "complaint", "request") else "message"
     msg = TravelMessage(
         company_id=link.company_id,
         project_id=link.project_id,
         travel_link_id=link.id,
-        kind=payload.kind if payload.kind in ("message", "complaint", "request") else "message",
+        kind=kind,
         body=payload.body,
     )
     db.add(msg)
     db.commit()
     db.refresh(msg)
+
+    # Resolve the client display name from the project, then notify the agency.
+    project = db.query(Project).filter(Project.id == link.project_id).first()
+    client_label = (getattr(project, "client_name", None) or "Client").strip() or "Client"
+    kind_label = {"message": "Message", "complaint": "Réclamation", "request": "Demande"}.get(kind, "Message")
+    audiences = ["travel_designer"]
+    if kind == "complaint":
+        audiences.append("admins")
+    await dispatch_to_project(
+        db=db,
+        project_id=link.project_id,
+        audiences=audiences,
+        sender_name=client_label,
+        notif_type="companion_message",
+        title=f"{kind_label} — Travel Companion",
+        message=payload.body[:200],
+        extra={"travel_message_id": msg.id, "kind": kind, "travel_link_id": link.id},
+    )
     return msg

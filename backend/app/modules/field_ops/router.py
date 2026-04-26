@@ -15,7 +15,7 @@ from app.core.database import get_db
 from app.core.config import settings
 from app.shared.dependencies import require_auth
 from app.modules.field_ops.models import FieldTask, FieldIncident, TaskStatus
-from app.modules.notifications.service import push_notification
+from app.modules.notifications.service import dispatch_to_project
 
 
 def _b64url(data: bytes) -> str:
@@ -102,14 +102,14 @@ def update_task_status(
     return {"id": task_id, "status": new_status}
 
 @router.post("/incidents")
-def report_incident(
+async def report_incident(
     body: IncidentRequest,
     current_user: dict = Depends(require_auth),
     db: Session = Depends(get_db)
 ):
-    """Report an incident from the field. Alerts the travel designer via notification."""
+    """Report an incident from the field. Alerts the travel designer + admins (high severity)."""
     user_id = current_user.get("sub") or current_user.get("id")
-    
+
     incident = FieldIncident(
         staff_id=user_id,
         task_id=body.task_id,
@@ -118,10 +118,33 @@ def report_incident(
     )
     db.add(incident)
     db.commit()
-    
-    # Logic to notify the travel designer/admin would go here
-    # Example: notification_service.send_to_project_owner(incident.task.project_id, ...)
-    
+    db.refresh(incident)
+
+    # Resolve project_id via the linked task (if any) and dispatch.
+    project_id: Optional[str] = None
+    if body.task_id:
+        task = db.get(FieldTask, body.task_id)
+        if task:
+            project_id = task.project_id
+
+    if project_id:
+        audiences = ["travel_designer"]
+        if body.severity in ("high", "critical"):
+            audiences.append("admins")
+        severity_label = {
+            "low": "Mineur", "medium": "Incident", "high": "Incident urgent", "critical": "Incident critique"
+        }.get(body.severity, "Incident")
+        await dispatch_to_project(
+            db=db,
+            project_id=project_id,
+            audiences=audiences,
+            sender_name=current_user.get("full_name", "Terrain"),
+            notif_type="incident",
+            title=f"{severity_label} signalé",
+            message=body.message[:200],
+            extra={"incident_id": incident.id, "severity": body.severity, "task_id": body.task_id},
+        )
+
     return {"id": incident.id, "status": "reported"}
 
 
