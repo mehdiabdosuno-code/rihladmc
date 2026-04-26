@@ -1,0 +1,12 @@
+{
+  "name": "stours-proposal-generator",
+  "version": "1.0.0",
+  "description": "Generate S'TOURS branded Word proposals from JSON project data",
+  "main": "generate.js",
+  "scripts": {
+    "generate": "node generate.js"
+  },
+  "dependencies": {
+    "docx": "^9.6.1"
+  }
+}

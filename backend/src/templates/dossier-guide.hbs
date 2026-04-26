@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a1a; font-size: 13px; }
+  .page { padding: 32px 40px; page-break-after: always; min-height: 100vh; }
+  .page:last-child { page-break-after: auto; }
+
+  /* Couverture */
+  .cover-header { background: linear-gradient(135deg, #1e3a5f, #2d5a8e); color: white; padding: 32px; border-radius: 12px; margin-bottom: 28px; }
+  .cover-header h1 { font-size: 28px; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
+  .cover-header h2 { font-size: 20px; font-weight: 400; opacity: 0.9; }
+  .cover-header .ref { margin-top: 12px; font-size: 12px; opacity: 0.75; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .info-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; }
+  .info-card label { font-size: 10px; text-transform: uppercase; color: #64748b; font-weight: 600; letter-spacing: 0.5px; }
+  .info-card p { font-size: 14px; font-weight: 600; margin-top: 4px; }
+  .urgence-box { background: #fff7ed; border-left: 4px solid #f97316; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-top: 16px; }
+  .urgence-box strong { color: #c2410c; }
+
+  /* Jours */
+  .jour-header { background: #f0f4f8; border-left: 5px solid #1e3a5f; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-bottom: 16px; }
+  .jour-header .jour-num { font-size: 11px; font-weight: 700; color: #1e3a5f; text-transform: uppercase; letter-spacing: 1px; }
+  .jour-header .jour-titre { font-size: 16px; font-weight: 700; color: #1a1a1a; }
+  .jour-header .jour-date { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+  .item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; padding: 12px; border: 1px solid #e8edf2; border-radius: 8px; background: #fff; }
+  .badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+  .item-body strong { font-size: 13px; }
+  .item-meta { color: #64748b; font-size: 11px; margin-top: 3px; }
+  .item-phone { color: #1e3a5f; font-size: 12px; font-weight: 600; margin-top: 4px; }
+  .item-notes { color: #888; font-size: 11px; font-style: italic; margin-top: 3px; }
+
+  /* Feuilles remarques */
+  .remarques-title { font-size: 16px; font-weight: 700; color: #1e3a5f; margin-bottom: 20px; border-bottom: 2px solid #1e3a5f; padding-bottom: 8px; }
+  .ligne { border-bottom: 1px solid #ddd; height: 30px; margin: 3px 0; }
+  .signature-row { display: flex; gap: 40px; margin-top: 24px; }
+  .signature-item { flex: 1; border-top: 1px solid #888; padding-top: 6px; font-size: 11px; color: #666; text-align: center; }
+
+  @page { margin: 0; }
+  @media print { body { -webkit-print-color-adjust: exact; } }
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE DE GARDE ===== -->
+<div class="page">
+  <div class="cover-header">
+    <div style="font-size:11px;opacity:0.6;letter-spacing:3px;margin-bottom:8px;">RIHLA — DOSSIER GUIDE CONFIDENTIEL</div>
+    <h1>📋 DOSSIER GUIDE</h1>
+    <h2>{{ dossier.nom_groupe }}</h2>
+    <div class="ref">Réf : {{ dossier.numero_dossier }}&nbsp;&nbsp;|&nbsp;&nbsp;Du {{ formatDate dossier.date_debut }} au {{ formatDate dossier.date_fin }}</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <label>Guide assigné</label>
+      <p>{{ dossier.guide.nom }}</p>
+      <div style="font-size:12px;color:#1e3a5f;margin-top:4px;">📞 {{ dossier.guide.telephone }}</div>
+    </div>
+    <div class="info-card">
+      <label>Tour Director</label>
+      <p>{{ dossier.td.nom }}</p>
+      <div style="font-size:12px;color:#1e3a5f;margin-top:4px;">📞 {{ dossier.td.telephone }}</div>
+    </div>
+    <div class="info-card">
+      <label>Participants</label>
+      <p>{{ dossier.nb_participants }} personnes</p>
+    </div>
+    <div class="info-card">
+      <label>Durée</label>
+      <p>{{ dossier.nb_jours }} jours</p>
+    </div>
+  </div>
+
+  <div class="urgence-box">
+    <strong>🚨 CONTACTS D'URGENCE</strong><br>
+    <span style="margin-top:6px;display:block;">TD : {{ dossier.td.nom }} — {{ dossier.td.telephone }}<br>
+    Email TD : {{ dossier.td.email }}</span>
+  </div>
+</div>
+
+<!-- ===== PROGRAMME JOUR PAR JOUR ===== -->
+{{#each programmes}}
+<div class="page">
+  <div class="jour-header">
+    <div class="jour-num">Jour {{ this.jour }}</div>
+    <div class="jour-titre">{{ this.titre }}</div>
+    <div class="jour-date">{{ formatDate this.date }}</div>
+  </div>
+
+  {{#if this.description}}
+  <p style="color:#555;font-size:12px;margin-bottom:14px;padding:10px;background:#f8fafc;border-radius:6px;">{{ this.description }}</p>
+  {{/if}}
+
+  {{#each this.items}}
+  <div class="item">
+    <span class="badge" style="background:{{badgeColor this.type}};color:{{textColor this.type}};">{{upper this.type}}</span>
+    <div class="item-body">
+      <strong>{{ this.prestataire_nom }}</strong>
+      {{#if this.heure_debut}}
+        <span style="color:#888;font-size:11px;margin-left:10px;">⏰ {{ this.heure_debut }}{{#if this.heure_fin}} – {{ this.heure_fin }}{{/if}}</span>
+      {{/if}}
+      {{#if this.lieu}}
+      <div class="item-meta">📍 {{ this.lieu }}</div>
+      {{/if}}
+      {{#if this.telephone}}
+      <div class="item-phone">📞 {{ this.telephone }}</div>
+      {{/if}}
+      {{#if this.notes}}
+      <div class="item-notes">{{ this.notes }}</div>
+      {{/if}}
+    </div>
+  </div>
+  {{/each}}
+</div>
+{{/each}}
+
+<!-- ===== FEUILLES DE REMARQUES (3 pages) ===== -->
+{{#times 3}}
+<div class="page">
+  <div class="remarques-title">📝 REMARQUES — Jour _______ &nbsp; Date : _______________</div>
+  {{#times 22}}<div class="ligne"></div>{{/times}}
+  <div class="signature-row" style="margin-top:32px;">
+    <div class="signature-item">Signature Guide</div>
+    <div class="signature-item">Signature Chef de Groupe</div>
+    <div class="signature-item">Date & Heure</div>
+  </div>
+</div>
+{{/times}}
+
+</body>
+</html>

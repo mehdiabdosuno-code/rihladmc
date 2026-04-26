@@ -1,0 +1,302 @@
+{
+  "client": {
+    "destination": "Morocco (Grand Tour: Casablanca → Chefchaouen → Fès → Merzouga → Ouarzazate → Marrakech)",
+    "pax": 20,
+    "duration_days": 9,
+    "duration_nights": 8,
+    "dates": "November 2026",
+    "budget_per_person": 1275,
+    "currency": "USD",
+    "travel_type": "premium_discovery",
+    "language": "EN",
+    "client_name": "SAINT TOUR",
+    "reference": "YS Travel Morocco 11D adhoc (Giant Tour is competitor) November 2026 dep",
+    "competitor": "Giant Tour"
+  },
+
+  "itinerary": [
+    {
+      "day": 1,
+      "title": "Arrival in Casablanca — The Economic Capital",
+      "city": "Casablanca",
+      "hotel": "Movenpick Casablanca",
+      "category": "5*",
+      "meal_plan": "BB",
+      "activities": [
+        "Airport pickup and VIP transfer to hotel",
+        "Panoramic city tour",
+        "Royal Palace of Casablanca (exterior photography)",
+        "Habbous quarter exploration",
+        "Mohamed V Square",
+        "Welcome dinner at the legendary Rick's Café"
+      ],
+      "description": "Upon arrival at Mohammed V International Airport, our elegant transfer welcomes you to Morocco's vibrant economic capital. After checking into the refined Movenpick, embark on a discovery of Casablanca's architectural contrasts — from the imperial grandeur of the Royal Palace to the artisanal charm of the Habbous quarter. As evening falls, step into the timeless atmosphere of Rick's Café, where cinema history meets gastronomic excellence, setting an unforgettable tone for your Moroccan odyssey."
+    },
+    {
+      "day": 2,
+      "title": "Casablanca → Rabat → Chefchaouen — The Blue Pearl",
+      "city": "Chefchaouen",
+      "hotel": "Dar Echaouen",
+      "category": "4*",
+      "meal_plan": "HB",
+      "activities": [
+        "Hassan II Mosque (guided interior visit)",
+        "Drive to Rabat — the imperial capital",
+        "Royal Palace of Rabat (exterior)",
+        "Hassan Tower & Mohammed V Mausoleum with Royal Cavalry",
+        "Lunch at Marina Sla (fresh fish)",
+        "Scenic journey to Chefchaouen through the Rif Mountains"
+      ],
+      "description": "Begin with a privileged tour of the monumental Hassan II Mosque, an architectural masterpiece rising dramatically from the Atlantic shore. Continue to Rabat, where colonial elegance meets imperial heritage — pause before the Royal Cavalry guarding the Mohammed V Mausoleum, then savor the catch of the day at Marina Sla. The afternoon unveils the magic of the Rif Mountains as you ascend to Chefchaouen, where the fabled blue medina awaits, cradled in a setting of breathtaking natural beauty."
+    },
+    {
+      "day": 3,
+      "title": "Chefchaouen → Volubilis → Meknes → Fès",
+      "city": "Fès",
+      "hotel": "Palais Medina Riad Resort",
+      "category": "5*",
+      "meal_plan": "HB",
+      "activities": [
+        "Guided exploration of Chefchaouen's blue medina",
+        "Drive through Rif Mountains to Volubilis",
+        "Volubilis UNESCO site — guided tour of Roman ruins",
+        "Traditional lunch at Roman City restaurant",
+        "Meknes: Bab Mansour Gate & City Walls (photo stop)",
+        "Arrival in Fès, the spiritual capital"
+      ],
+      "description": "Wander through the photogenic blue-washed alleys of Chefchaouen at their most luminous, then descend toward the majestic Roman ruins of Volubilis, a UNESCO treasure framed by golden olive groves. After a traditional Moroccan lunch with mosaics as your dining companions, pass through the imperial city of Meknes to admire the grandeur of Bab Mansour. Your journey culminates in Fès, Morocco's spiritual soul, where the refined Palais Medina Riad Resort opens its doors to an evening of oriental elegance."
+    },
+    {
+      "day": 4,
+      "title": "Fès — Imperial City & Ancient Medina",
+      "city": "Midelt (evening)",
+      "hotel": "Tadart",
+      "category": "3*",
+      "meal_plan": "HB",
+      "activities": [
+        "Full-day guided tour with expert local guide",
+        "Bab Bou Jeloud (the Blue Gate)",
+        "Karaouine Mosque & Moulay Idriss Mosque (exterior)",
+        "Bou Inania Madrasah (interior visit)",
+        "Royal Palace of Fès (exterior)",
+        "Tannerie terrasses — panoramic view",
+        "Lunch at Chinese Restaurant",
+        "Afternoon drive to Midelt via Middle Atlas"
+      ],
+      "description": "Immerse yourself in the labyrinthine medina of Fès el-Bali, the world's largest living medieval Islamic city. With a certified local guide, decode the secrets of the Karaouine Mosque, marvel at the intricate zellige of Bou Inania Madrasah, and witness the timeless tanning pits from panoramic terraces. After lunch, ascend the Middle Atlas — cedar forests and cooler altitudes leading to Midelt, a peaceful mountain town where your comfortable retreat awaits before the great desert crossing."
+    },
+    {
+      "day": 5,
+      "title": "Midelt → Erfoud → Merzouga — Gateway to the Sahara",
+      "city": "Merzouga",
+      "hotel": "Kasbah Tombouctou",
+      "category": "4*",
+      "meal_plan": "HB",
+      "activities": [
+        "Drive through Ziz Valley & date palm oases",
+        "Stop at Ifrane — photo at the iconic Stone Lion",
+        "Lunch at Chergui Hotel/Restaurant, Erfoud",
+        "Fossil factory visit (exterior)",
+        "4x4 transfer to Merzouga dunes (4 pax per vehicle)",
+        "Sunset camel ride over the Erg Chebbi dunes",
+        "Dinner under the Saharan stars at Kasbah Tombouctou"
+      ],
+      "description": "The day unfolds as a cinematic journey: the fertile Ziz Valley gives way to the alpine town of Ifrane, its Stone Lion a nod to Morocco's surprising diversity. Lunch in Erfoud precedes the exhilarating 4x4 transfer toward the amber dunes of Erg Chebbi. As the sun begins its descent, mount your camel for the iconic ride across the Sahara — a timeless ritual culminating in a silhouette of golden dunes. Evening brings the warm hospitality of Kasbah Tombouctou, where Berber tradition meets refined comfort."
+    },
+    {
+      "day": 6,
+      "title": "Merzouga → Tinghir → Dades Valley → Ouarzazate",
+      "city": "Ouarzazate",
+      "hotel": "Oscar Studio Hotel",
+      "category": "4*",
+      "meal_plan": "HB",
+      "activities": [
+        "Scenic drive along the Kasbah Road",
+        "Ancient Qanat irrigation system",
+        "Tinghir Oasis panoramic viewpoint",
+        "Todgha Gorges — walk between towering cliffs",
+        "Lunch at Yasmina (chicken tajine with lemon & olives)",
+        "Dades Valley & Kelaa M'Gouna (Valley of Roses)",
+        "Arrival in Ouarzazate, 'Hollywood of Africa'"
+      ],
+      "description": "Depart the Sahara along the legendary Road of a Thousand Kasbahs. The ancient Qanat system reveals Morocco's agricultural ingenuity, while the Tinghir Oasis offers postcard panoramas of emerald palm groves set against ochre cliffs. A walk through the Todgha Gorges — their 300-meter walls a natural cathedral — precedes a regional lunch at Yasmina. The afternoon traces the Dades Valley and Valley of Roses, arriving at sunset in Ouarzazate, Morocco's cinematic crossroads where legendary films have been born."
+    },
+    {
+      "day": 7,
+      "title": "Ouarzazate → Ait Ben Haddou → Marrakech",
+      "city": "Marrakech",
+      "hotel": "Adam Park",
+      "category": "5*",
+      "meal_plan": "HB",
+      "activities": [
+        "Visit Atlas Studios (entrance included)",
+        "Ait Ben Haddou UNESCO ksar (exterior & climb to granary)",
+        "Lunch at Oasis d'Or restaurant",
+        "Drive over the legendary Tizi-N-Tichka pass",
+        "Arrival in Marrakech, the Red City",
+        "Koutoubia Mosque (exterior)",
+        "Dinner at hotel"
+      ],
+      "description": "Step into cinema history at Atlas Studios, where Gladiator and Game of Thrones came alive. Continue to Ait Ben Haddou — the UNESCO-listed earthen citadel that has starred in countless films, its silhouette as timeless as the desert itself. After a memorable lunch, ascend the spectacular Tizi-N-Tichka pass through the High Atlas, a symphony of serpentine roads and snow-capped peaks. Descend into Marrakech as the setting sun paints the Koutoubia minaret in shades of terracotta, ushering you to the refined Adam Park."
+    },
+    {
+      "day": 8,
+      "title": "Marrakech → Essaouira Day Trip → Marrakech",
+      "city": "Marrakech",
+      "hotel": "Adam Park",
+      "category": "5*",
+      "meal_plan": "BB + Gala Dinner at Chez Ali",
+      "activities": [
+        "Scenic drive to the Atlantic coast",
+        "Argan oil cooperative visit (women's collective)",
+        "Essaouira fortified medina, harbor, ramparts",
+        "Fresh seafood lunch at Zahra Grill",
+        "Fish market & fortress exploration",
+        "Return to Marrakech",
+        "Gala dinner at Chez Ali — Fantasia show"
+      ],
+      "description": "Escape to the Atlantic breeze of Essaouira, the 'Wind City' beloved by artists since Jimi Hendrix. En route, witness the artisanal production of argan oil by a women's cooperative — a gesture of support for local empowerment. The Portuguese-influenced ramparts frame a harbor of azure fishing boats, leading to a fresh seafood feast at Zahra Grill (octopus, oysters, grilled fish). Evening brings a grand finale: the legendary Fantasia show at Chez Ali, where Berber horsemen, couscous, and pastilla au lait celebrate Moroccan grandeur."
+    },
+    {
+      "day": 9,
+      "title": "Marrakech — Highlights & Departure",
+      "city": "Marrakech",
+      "hotel": "Departure",
+      "category": "—",
+      "meal_plan": "BB",
+      "activities": [
+        "Bahia Palace (interior visit with local guide)",
+        "Majorelle Garden (entrance included)",
+        "Horse carriage ride through the medina (4 pax per carriage)",
+        "Jemaa el-Fna square",
+        "Airport transfer for international departure"
+      ],
+      "description": "Crown your Moroccan journey with the finest jewels of Marrakech. The Bahia Palace enchants with its painted cedar ceilings and serene Andalusian courtyards, while Majorelle Garden — once Yves Saint Laurent's sanctuary — explodes in cobalt blue amid rare botanicals. Board a horse-drawn carriage for a romantic tour of the medina, circling Jemaa el-Fna's timeless theater. A seamless transfer to Marrakech Menara Airport closes this premium Moroccan odyssey, already a cherished memory."
+    }
+  ],
+
+  "hotels": [
+    {"name": "Movenpick Casablanca",          "city": "Casablanca",  "category": "5*",  "nights": 1, "meal_plan": "BB", "estimated_price_per_night_twin": 180},
+    {"name": "Dar Echaouen",                  "city": "Chefchaouen", "category": "4*",  "nights": 1, "meal_plan": "HB", "estimated_price_per_night_twin": 140},
+    {"name": "Palais Medina Riad Resort",     "city": "Fès",         "category": "5*",  "nights": 1, "meal_plan": "HB", "estimated_price_per_night_twin": 170},
+    {"name": "Tadart",                        "city": "Midelt",      "category": "3*",  "nights": 1, "meal_plan": "HB", "estimated_price_per_night_twin": 85},
+    {"name": "Kasbah Tombouctou",             "city": "Merzouga",    "category": "4*",  "nights": 1, "meal_plan": "HB", "estimated_price_per_night_twin": 130},
+    {"name": "Oscar Studio Hotel",            "city": "Ouarzazate",  "category": "4*",  "nights": 1, "meal_plan": "HB", "estimated_price_per_night_twin": 110},
+    {"name": "Adam Park Marrakech",           "city": "Marrakech",   "category": "5*",  "nights": 2, "meal_plan": "HB+BB", "estimated_price_per_night_twin": 175}
+  ],
+
+  "activities": [
+    {"name": "Hassan II Mosque guided visit",             "city": "Casablanca",   "category": "culture",       "price_per_person": 14},
+    {"name": "Rick's Café dinner experience",              "city": "Casablanca",   "category": "gastronomy",    "price_per_person": 55},
+    {"name": "Volubilis UNESCO Roman ruins",               "city": "Volubilis",    "category": "culture",       "price_per_person": 8},
+    {"name": "Bou Inania Madrasah",                        "city": "Fès",          "category": "culture",       "price_per_person": 4},
+    {"name": "Fès local guide (day rate)",                 "city": "Fès",          "category": "guide",         "price_per_person": 8},
+    {"name": "4x4 Merzouga transfer (Erfoud ↔ dunes)",     "city": "Merzouga",     "category": "adventure",     "price_per_person": 50},
+    {"name": "Sunset camel ride",                          "city": "Merzouga",     "category": "adventure",     "price_per_person": 35},
+    {"name": "Atlas Studios",                              "city": "Ouarzazate",   "category": "culture",       "price_per_person": 10},
+    {"name": "Bahia Palace",                               "city": "Marrakech",    "category": "culture",       "price_per_person": 8},
+    {"name": "Majorelle Garden",                           "city": "Marrakech",    "category": "relaxation",    "price_per_person": 15},
+    {"name": "Horse carriage medina (4 pax/carriage)",     "city": "Marrakech",    "category": "experience",    "price_per_person": 20},
+    {"name": "Chez Ali Fantasia gala dinner",              "city": "Marrakech",    "category": "gastronomy",    "price_per_person": 60},
+    {"name": "Argan oil cooperative visit",                "city": "Essaouira",    "category": "culture",       "price_per_person": 0}
+  ],
+
+  "transport": {
+    "main_vehicle": {
+      "type": "48-seater coach",
+      "model": "MAN Irizar i6 / Mercedes Irizar i6",
+      "equipment": ["A/C", "Reclining seats", "Seatbelts", "Wi-Fi"],
+      "days": 9,
+      "estimated_cost_per_day": 550,
+      "total_cost": 4950
+    },
+    "special_transport": {
+      "type": "4x4 Jeep (Merzouga excursion, 4 pax/vehicle)",
+      "vehicles_needed_for_20pax": 5,
+      "cost_per_vehicle": 80,
+      "total_cost": 400
+    },
+    "total_transport_cost": 5350
+  },
+
+  "pricing": {
+    "currency": "USD",
+    "basis_used_for_calculation": "20 pax minimum (+ 1 FOC)",
+    "grid_per_person_twin_sharing": [
+      {"basis": "10 + 1 FOC", "price_per_person": 1588, "single_supplement": 315},
+      {"basis": "15 + 1 FOC", "price_per_person": 1385, "single_supplement": 315},
+      {"basis": "20 + 1 FOC", "price_per_person": 1275, "single_supplement": 315},
+      {"basis": "25 + 1 FOC", "price_per_person": 1210, "single_supplement": 315},
+      {"basis": "30 + 1 FOC", "price_per_person": 1165, "single_supplement": 315},
+      {"basis": "35 + 1 FOC", "price_per_person": 1140, "single_supplement": 315}
+    ],
+    "selected_scenario": {
+      "basis": "20 + 1 FOC",
+      "cost_per_person": 1062,
+      "margin_percentage": 20,
+      "selling_price_per_person": 1275,
+      "single_supplement": 315,
+      "total_project_price_20pax": 25500,
+      "total_with_single_supp_10pax": 28650,
+      "foc_policy": "1 tour leader free of charge"
+    },
+    "payment_terms": {
+      "deposit_percent": 30,
+      "balance_due": "Before arrival",
+      "cancellation_policy": "Standard DMC terms"
+    }
+  },
+
+  "inclusions": [
+    "09 days / 08 nights accommodation in listed hotels (or similar)",
+    "08 buffet breakfasts at hotels",
+    "07 lunches and 08 dinners as per Catering section",
+    "1 large bottle mineral water per 3 pax per meal",
+    "Complimentary single room for tour leader (1 FOC)",
+    "48-seater coach with A/C, Wi-Fi and reclining seats",
+    "English-speaking tour guide throughout the journey",
+    "Local licensed guides in Fès, Meknes, Rabat, Marrakech (mandatory for 20+ groups)",
+    "All monument entrance fees as indicated",
+    "4x4 Jeep excursion Erfoud–Merzouga (4 pax/vehicle)",
+    "Sunset camel ride over the Erg Chebbi dunes",
+    "Horse carriage tour in Marrakech (4 pax/carriage)",
+    "Gala dinner with Fantasia show at Chez Ali",
+    "City taxes and hotel porter tips (in/out)",
+    "Mineral water in coach (1 btl/pax/day)",
+    "Tips for restaurants and hotels (compulsory)"
+  ],
+
+  "exclusions": [
+    "International flights",
+    "Visa fees (if applicable)",
+    "Travel insurance",
+    "Personal expenses (laundry, telephone, minibar)",
+    "Tips for guides and drivers (recommended: USD 3-5 per pax per day)",
+    "Optional activities not mentioned in the program",
+    "Any services not specifically mentioned as included"
+  ],
+
+  "competitive_positioning": {
+    "competitor": "Giant Tour",
+    "stours_advantages": [
+      "Premium 5* hotels in Casablanca, Fès & Marrakech (often 4* in competitor packages)",
+      "English-speaking guide throughout (not just local guides)",
+      "Gala dinner at iconic Chez Ali included",
+      "1 FOC tour leader policy",
+      "30+ years of DMC expertise in Morocco",
+      "Licensed local guides in each imperial city",
+      "Modern fleet (MAN/Mercedes Irizar i6 2023+)"
+    ]
+  },
+
+  "contact": {
+    "operator": "S'TOURS DMC Morocco",
+    "email": "a.chakir@stours.ma",
+    "phone": "+212 522 95 40 00",
+    "hq": "4 rue Turgot, Casablanca 20100",
+    "marrakech_office": "61 rue Yougoslavie, Guéliz, Marrakech",
+    "website": "www.stours.ma",
+    "ice": "001542976000081",
+    "rc": "44367"
+  }
+}
