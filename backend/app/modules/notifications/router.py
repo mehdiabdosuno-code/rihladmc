@@ -54,9 +54,23 @@ async def notification_stream(
         try:
             for n in reversed(unread):
                 yield f"data: {json.dumps(_unread_payload(n))}\n\n"
-            async for message in pubsub.listen():
+            # Poll with timeout so we can emit SSE keepalive comments while idle.
+            # `pubsub.listen()` is a blocking iterator that hits the connection
+            # read timeout (~25s) and raises, killing the stream — so we use
+            # `get_message` instead and yield a `: ping` line on each idle tick.
+            while True:
                 if await request.is_disconnected():
                     break
+                try:
+                    message = await pubsub.get_message(
+                        ignore_subscribe_messages=True, timeout=15.0,
+                    )
+                except Exception as exc:
+                    logger.warning("Redis pubsub read failed (%s) — closing SSE", exc)
+                    break
+                if message is None:
+                    yield ": ping\n\n"
+                    continue
                 if message.get("type") == "message":
                     yield f"data: {message['data']}\n\n"
         finally:
