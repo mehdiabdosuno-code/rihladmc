@@ -37,6 +37,7 @@ const CircuitGeneratorPage  = lazy(() => import('@/pages/CircuitGeneratorPage').
 const ProposalStudioPage    = lazy(() => import('@/pages/ProposalStudioPage').then(m => ({ default: m.ProposalStudioPage })))
 const ProposalWriterPage    = lazy(() => import('@/pages/ProposalWriterPage').then(m => ({ default: m.ProposalWriterPage })))
 const IntegrationsPage      = lazy(() => import('@/pages/IntegrationsPage').then(m => ({ default: m.IntegrationsPage })))
+const ErpIntegrationsPage   = lazy(() => import('@/pages/ErpIntegrationsPage').then(m => ({ default: m.ErpIntegrationsPage })))
 const SustainabilityPage    = lazy(() => import('@/pages/SustainabilityPage').then(m => ({ default: m.SustainabilityPage })))
 const PaymentAgentPage      = lazy(() => import('@/pages/PaymentAgentPage').then(m => ({ default: m.PaymentAgentPage })))
 const PricingCoachPage      = lazy(() => import('@/pages/PricingCoachPage').then(m => ({ default: m.PricingCoachPage })))
@@ -187,6 +188,7 @@ export default function App() {
                 <Route path="/proposal-studio"       element={<ProposalStudioPage />} />
                 <Route path="/proposal-writer"       element={<ProposalWriterPage />} />
                 <Route path="/integrations"          element={<IntegrationsPage />} />
+                <Route path="/erp-integrations"      element={<ErpIntegrationsPage />} />
                 <Route path="/sustainability"        element={<SustainabilityPage />} />
                 <Route path="/payment-agent"         element={<PaymentAgentPage />} />
                 <Route path="/pricing-coach"         element={<PricingCoachPage />} />

@@ -43,6 +43,7 @@ import app.modules.document_flow.models   as _dfm  # noqa: F401
 import app.modules.approvals.models       as _apm  # noqa: F401
 import app.modules.travel_companion.models as _tcm  # noqa: F401
 import app.modules.supplier_score.models  as _ssm  # noqa: F401
+import app.modules.erp_integration.models as _erpm # noqa: F401
 
 # ── In-memory SQLite engine ───────────────────────────────────────────────
 SQLITE_URL = "sqlite:///:memory:"

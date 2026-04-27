@@ -1309,6 +1309,87 @@ export interface CotationFullView {
   summary:  { total_lines: number; total_brackets: number; total_terms: number }
 }
 
+// ── ERP integration (SAP S/4HANA & Business One) ──────────────────────
+export interface ErpConfig {
+  id: string
+  company_id: string
+  client_key: string
+  label: string
+  kind: 'sap_s4hana' | 'sap_business_one'
+  base_url: string | null
+  is_dry_run: boolean
+  is_active: boolean
+  notes: string | null
+  has_oauth_secret: boolean
+  has_b1_password:  boolean
+  oauth_token_url: string | null
+  oauth_client_id: string | null
+  oauth_scope:     string | null
+  b1_company_db:   string | null
+  b1_username:     string | null
+  mapping: Record<string, any> | null
+  created_at: string | null
+  updated_at: string | null
+}
+export interface ErpConfigPayload {
+  client_key: string
+  label: string
+  kind: 'sap_s4hana' | 'sap_business_one'
+  base_url?: string | null
+  is_dry_run?: boolean
+  is_active?: boolean
+  notes?: string | null
+  oauth_token_url?: string | null
+  oauth_client_id?: string | null
+  oauth_client_secret?: string | null
+  oauth_scope?: string | null
+  b1_company_db?: string | null
+  b1_username?: string | null
+  b1_password?: string | null
+  mapping?: Record<string, any> | null
+}
+export interface ErpPushResult {
+  log_id: string
+  status: 'pending' | 'success' | 'failed'
+  http_status: number | null
+  remote_ref:  string | null
+  is_dry_run: boolean
+  duration_ms: number | null
+  error_message: string | null
+  request_payload: Record<string, any> | null
+}
+export interface ErpPushLog {
+  id: string
+  company_id: string
+  config_id: string | null
+  invoice_id: string
+  idempotency_key: string
+  kind: string
+  is_dry_run: boolean
+  status: 'pending' | 'success' | 'failed'
+  http_status: number | null
+  remote_ref:  string | null
+  request_payload:  Record<string, any> | null
+  response_payload: Record<string, any> | null
+  error_message: string | null
+  duration_ms:   number | null
+  created_at: string | null
+}
+export const erpApi = {
+  listConfigs:   (params?: { is_active?: boolean }) =>
+    api.get<ErpConfig[]>('/erp/configs', { params }),
+  createConfig:  (payload: ErpConfigPayload) =>
+    api.post<ErpConfig>('/erp/configs', payload),
+  updateConfig:  (id: string, payload: ErpConfigPayload) =>
+    api.patch<ErpConfig>(`/erp/configs/${id}`, payload),
+  deleteConfig:  (id: string) => api.delete(`/erp/configs/${id}`),
+  pushInvoice:   (invoiceId: string, body: { config_id?: string; force?: boolean } = {}) =>
+    api.post<ErpPushResult>(`/erp/invoices/${invoiceId}/push`, body),
+  listLogs:      (params?: { invoice_id?: string; config_id?: string; status?: string; limit?: number }) =>
+    api.get<ErpPushLog[]>('/erp/logs', { params }),
+  getLog:        (id: string) => api.get<ErpPushLog>(`/erp/logs/${id}`),
+}
+
 export const cotationApi = {
   brackets:        (qid: string) => api.get<PricingBracket[]>(`/cotation/quotations/${qid}/brackets`),
   recomputeGrid:   (qid: string, payload: RecomputePayload) => api.post<PricingBracket[]>(`/cotation/quotations/${qid}/recompute-grid`, payload),

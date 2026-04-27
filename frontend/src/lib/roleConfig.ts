@@ -105,6 +105,7 @@ const ALL_GROUPS: NavGroup[] = [
       { to: '/payment-agent',        icon: 'Bot',             label: 'Agent Acompte' },
       { to: '/pricing-coach',        icon: 'Brain',           label: 'Pricing Coach' },
       { to: '/m365',                 icon: 'Cloud',           label: 'Microsoft 365' },
+      { to: '/erp-integrations',     icon: 'Plug',            label: 'ERP Client (SAP)' },
       { to: '/o2c',                  icon: 'Workflow',        label: 'Order-to-Cash' },
       { to: '/p2p',                  icon: 'ShoppingCart',    label: 'Procure-to-Pay' },
       { to: '/data-hub',             icon: 'Database',        label: 'Data Hub · recherche' },
