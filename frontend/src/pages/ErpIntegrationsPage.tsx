@@ -96,6 +96,7 @@ export function ErpIntegrationsPage() {
         b1_company_db: cfg.b1_company_db ?? '',
         b1_username: cfg.b1_username ?? '',
         b1_password: '',
+        mapping: cfg.mapping ?? undefined,
       },
     })
   }
