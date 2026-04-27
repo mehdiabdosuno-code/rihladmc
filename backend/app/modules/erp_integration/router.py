@@ -15,6 +15,7 @@ from app.modules.erp_integration.models import ClientErpConfig, ErpPushLog
 from app.modules.erp_integration.schemas import (
     ErpConfigCreate,
     ErpConfigOut,
+    ErpConfigUpdate,
     ErpPushLogOut,
     ErpPushRequest,
     ErpPushResult,
@@ -51,7 +52,7 @@ def list_configs(
     "/configs",
     response_model=ErpConfigOut,
     status_code=201,
-    dependencies=[Depends(require_role("super_admin", "admin"))],
+    dependencies=[Depends(require_role("super_admin", "quotation_officer"))],
 )
 def create_config(
     data: ErpConfigCreate,
@@ -99,28 +100,31 @@ def create_config(
 @router.patch(
     "/configs/{cfg_id}",
     response_model=ErpConfigOut,
-    dependencies=[Depends(require_role("super_admin", "admin"))],
+    dependencies=[Depends(require_role("super_admin", "quotation_officer"))],
 )
 def update_config(
     cfg_id: str,
-    data: ErpConfigCreate,
+    data: ErpConfigUpdate,
     db: Session = Depends(get_db),
     company_id: str = Depends(get_current_company_id),
 ):
     cfg = db.get(ClientErpConfig, cfg_id)
     if not cfg or cfg.company_id != company_id:
         raise HTTPException(404, "ErpConfig not found")
-    for field in (
-        "client_key", "label", "kind", "base_url", "is_dry_run", "is_active",
-        "notes", "oauth_token_url", "oauth_client_id", "oauth_scope",
-        "b1_company_db", "b1_username", "mapping",
-    ):
-        setattr(cfg, field, getattr(data, field))
-    # Sensitive fields: only overwrite when a non-empty value is supplied.
-    if data.oauth_client_secret:
-        cfg.oauth_client_secret = data.oauth_client_secret
-    if data.b1_password:
-        cfg.b1_password = data.b1_password
+
+    # Pydantic v2: only fields explicitly set by the caller are present here
+    # — omitted ones are NOT included, so we never clobber existing values.
+    provided = data.model_dump(exclude_unset=True)
+
+    # Sensitive fields: ignore empty strings (the frontend sends "" to mean
+    # "keep current value") so we don't wipe stored secrets to empty.
+    if not provided.get("oauth_client_secret"):
+        provided.pop("oauth_client_secret", None)
+    if not provided.get("b1_password"):
+        provided.pop("b1_password", None)
+
+    for field, value in provided.items():
+        setattr(cfg, field, value)
     db.commit()
     db.refresh(cfg)
     return service.to_safe_dict(cfg)
@@ -129,7 +133,7 @@ def update_config(
 @router.delete(
     "/configs/{cfg_id}",
     status_code=204,
-    dependencies=[Depends(require_role("super_admin", "admin"))],
+    dependencies=[Depends(require_role("super_admin", "quotation_officer"))],
 )
 def delete_config(
     cfg_id: str,

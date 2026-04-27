@@ -33,6 +33,36 @@ class ErpConfigCreate(BaseModel):
     mapping: Optional[dict] = None
 
 
+class ErpConfigUpdate(BaseModel):
+    """Partial-update payload for an existing ERP target.
+
+    Every field is optional. Only fields explicitly provided by the caller
+    are applied (via Pydantic's ``model_dump(exclude_unset=True)``); omitted
+    fields keep their existing value. This is the correct PATCH semantic:
+    e.g. omitting ``is_dry_run`` must NOT silently revert a live config to
+    dry-run mode.
+    """
+
+    client_key: Optional[str] = Field(default=None, min_length=1, max_length=255)
+    label:      Optional[str] = Field(default=None, min_length=1, max_length=255)
+    kind:       Optional[str] = Field(default=None, pattern="^(sap_s4hana|sap_business_one)$")
+    base_url:   Optional[str] = None
+    is_dry_run: Optional[bool] = None
+    is_active:  Optional[bool] = None
+    notes:      Optional[str] = None
+
+    oauth_token_url:     Optional[str] = None
+    oauth_client_id:     Optional[str] = None
+    oauth_client_secret: Optional[str] = None
+    oauth_scope:         Optional[str] = None
+
+    b1_company_db: Optional[str] = None
+    b1_username:   Optional[str] = None
+    b1_password:   Optional[str] = None
+
+    mapping: Optional[dict] = None
+
+
 class ErpConfigOut(BaseModel):
     id: str
     company_id: str
