@@ -71,6 +71,7 @@ from app.modules.p2p.router import router as p2p_router
 from app.modules.data_hub.router import router as data_hub_router
 from app.modules.agent_designer.router import router as agent_designer_router
 from app.modules.cotation_advanced.router import router as cotation_advanced_router
+from app.modules.erp_integration.router import router as erp_integration_router
 from app.core.tenant import TenantMiddleware
 
 
@@ -168,6 +169,7 @@ app.include_router(p2p_router, prefix="/api")
 app.include_router(data_hub_router, prefix="/api")
 app.include_router(agent_designer_router, prefix="/api")
 app.include_router(cotation_advanced_router, prefix="/api")
+app.include_router(erp_integration_router, prefix="/api")
 
 # ── New features (Phase 4+5) ─────────────────────────────────────
 from app.modules.pdf_generator.router import router as pdf_router
