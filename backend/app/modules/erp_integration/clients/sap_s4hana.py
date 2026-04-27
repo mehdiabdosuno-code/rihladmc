@@ -102,10 +102,9 @@ def push_supplier_invoice(
         # Try multiple shapes — OData wraps in `d` or `value` depending on version.
         ref = None
         if isinstance(body, dict):
-            ref = (
-                body.get("SupplierInvoice")
-                or body.get("d", {}).get("SupplierInvoice") if isinstance(body.get("d"), dict) else None
-            )
+            ref = body.get("SupplierInvoice")
+            if not ref and isinstance(body.get("d"), dict):
+                ref = body["d"].get("SupplierInvoice")
             ref = ref or body.get("SupplierInvoiceIDByInvcgParty")
         return PushOutcome(
             ok=True, http_status=r.status_code,
@@ -113,11 +112,18 @@ def push_supplier_invoice(
             response_payload=body,
         )
 
+    err_msg = None
+    if isinstance(body, dict):
+        err = body.get("error")
+        if isinstance(err, dict):
+            msg = err.get("message")
+            if isinstance(msg, dict):
+                err_msg = msg.get("value")
+            elif isinstance(msg, str):
+                err_msg = msg
     return PushOutcome(
         ok=False,
         http_status=r.status_code,
         response_payload=body,
-        error_message=(body or {}).get("error", {}).get("message", {}).get("value")
-            if isinstance(body, dict)
-            else f"HTTP {r.status_code}",
+        error_message=err_msg or f"HTTP {r.status_code}",
     )
